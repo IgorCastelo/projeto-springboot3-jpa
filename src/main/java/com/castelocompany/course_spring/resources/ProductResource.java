@@ -8,10 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.castelocompany.course_spring.entities.Category;
 import com.castelocompany.course_spring.entities.Product;
-import com.castelocompany.course_spring.services.CategoryService;
 import com.castelocompany.course_spring.services.ProductService;
 
 @RestController
