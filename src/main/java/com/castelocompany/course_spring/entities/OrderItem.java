@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import com.castelocompany.course_spring.entities.pk.OrderItemPK;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -14,23 +15,23 @@ public class OrderItem implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@EmbeddedId
-	private OrderItemPK id;
+	private OrderItemPK id = new OrderItemPK();
 
-	private Integer quabtity;
+	private Integer quantity;
 	private Double price;
 
 	public OrderItem() {
 
 	}
 
-	public OrderItem(Order order, Product product, Integer quabtity, Double price) {
+	public OrderItem(Order order, Product product, Integer quantity, Double price) {
 		super();
 		id.setOrder(order);
 		id.setProduct(product);
-		this.quabtity = quabtity;
+		this.quantity = quantity;
 		this.price = price;
 	}
-	
+	@JsonIgnore// tem que colocar no metodo get da coleção, pois o java so reconehce nesse metodo
 	public Order getOrder() {
 		return id.getOrder();
 	}
@@ -49,11 +50,11 @@ public class OrderItem implements Serializable {
 	}
 	
 	public Integer getQuantity() {//inserido manualmente assim como no construtor
-		return quabtity;
+		return quantity;
 	}
 
-	public void setQuabtity(Integer quabtity) {
-		this.quabtity = quabtity;
+	public void setQuabtity(Integer quantity) {
+		this.quantity = quantity;
 	}
 
 	public Double getPrice() {
