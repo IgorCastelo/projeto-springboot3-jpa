@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Profile;
 import com.castelocompany.course_spring.entities.Category;
 import com.castelocompany.course_spring.entities.Order;
 import com.castelocompany.course_spring.entities.OrderItem;
+import com.castelocompany.course_spring.entities.Payment;
 import com.castelocompany.course_spring.entities.Product;
 import com.castelocompany.course_spring.entities.User;
 import com.castelocompany.course_spring.enums.OrderStatus;
@@ -38,6 +39,8 @@ public class TestConfig implements CommandLineRunner {
 
 	@Autowired
 	private OrderItemRepository orderItemRepository;
+	
+	
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -80,6 +83,11 @@ public class TestConfig implements CommandLineRunner {
 		OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice()); 
 		
 		orderItemRepository.saveAll(Arrays.asList(oi1,oi2,oi3,oi4));
+		
+		
+		Payment pay1 = new Payment(null,Instant.parse( "2019-06-20T21:53:07Z"), o1);
+		o1.setPayment(pay1);//vincula o pagamento ao pedido(seta na associação Order o objeto Payment)
+		orderRepository.save(o1);//salva novamente a classe que nçao é dependente
 		
 		}
 	

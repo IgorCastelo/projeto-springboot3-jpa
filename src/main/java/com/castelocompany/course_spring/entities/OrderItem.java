@@ -31,7 +31,7 @@ public class OrderItem implements Serializable {
 		this.quantity = quantity;
 		this.price = price;
 	}
-	                            // tem que colocar no metodo get da coleção, pois o java so reconehce nesse metodo
+	 @JsonIgnore                           // tem que colocar no metodo get da coleção, pois o java so reconehce nesse metodo
 	public Order getOrder() {
 		return id.getOrder();
 	}
