@@ -9,11 +9,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
+
 @Entity
-@Table(name="tb_order_item")
+@Table(name = "tb_order_item")
 public class OrderItem implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@EmbeddedId
 	private OrderItemPK id = new OrderItemPK();
 
@@ -31,29 +32,17 @@ public class OrderItem implements Serializable {
 		this.quantity = quantity;
 		this.price = price;
 	}
-	 @JsonIgnore                           // tem que colocar no metodo get da coleção, pois o java so reconehce nesse metodo
-	public Order getOrder() {
-		return id.getOrder();
+	public Double getSubTotal() {
+		return quantity * price;
 	}
+
 	
-	public void setOrder(Order order) {//inserido manualmente assim como no construtor
-		 
-		id.setOrder(order);
-	}
 	
-	public Product getProduct() {//inserido manualmente assim como no construtor
-		return id.getProduct();
-	}
-	
-	public void setProduct(Product product) {//inserido manualmente assim como no construtor
-		id.setProduct(product);
-	}
-	
-	public Integer getQuantity() {//inserido manualmente assim como no construtor
+	public Integer getQuantity() {// inserido manualmente assim como no construtor
 		return quantity;
 	}
 
-	public void setQuabtity(Integer quantity) {
+	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
 
@@ -63,6 +52,26 @@ public class OrderItem implements Serializable {
 
 	public void setPrice(Double price) {
 		this.price = price;
+	}
+	
+	@JsonIgnore
+	public Order getOrder() {
+		return id.getOrder();
+	}
+
+	public void setOrder(Order order) {// inserido manualmente assim como no construtor
+		id.setOrder(order);
+	}
+	
+	
+
+	public Product getProduct() {// inserido manualmente assim como no construtor
+		return id.getProduct();
+	}
+
+	public void setProduct(Product product) {// inserido manualmente assim como no construtor
+		id.setProduct(product);
+
 	}
 
 	@Override

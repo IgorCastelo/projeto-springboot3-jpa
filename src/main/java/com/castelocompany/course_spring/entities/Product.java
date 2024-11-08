@@ -21,45 +21,40 @@ import jakarta.persistence.Table;
 @Table(name = "tb_product")
 public class Product implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long Id;
-
+	private Long id;
 	private String name;
-	private String Description;
+	private String description;
 	private Double price;
 	private String imgUrl;
-
+	
+	@OneToMany(mappedBy="id.product")
+	private Set<OrderItem> items = new HashSet<>();
+	
 	@ManyToMany
 	@JoinTable(name = "tb_product_category", joinColumns = @JoinColumn(name = "product_id"),
 	inverseJoinColumns = @JoinColumn(name = "category_id"))
  	private Set<Category> categories = new HashSet<>();
-	
-	@OneToMany(mappedBy="id.product")
-	private Set<OrderItem> items = new HashSet<>();
+
 
 	public Product() {
 
 	}
 
 	public Product(Long id, String name, String description, Double price, String imgUrl) {
-		super();
-		Id = id;
+		this.id = id;
 		this.name = name;
-		Description = description;
+		this.description = description;
 		this.price = price;
 		this.imgUrl = imgUrl;
 	}
 
-	public Long getId() {
-		return Id;
-	}
-
+	
+	
+	
 	public void setId(Long id) {
-		Id = id;
+		this.id = id;
 	}
 
 	public String getName() {
@@ -70,6 +65,41 @@ public class Product implements Serializable {
 		this.name = name;
 	}
 	
+	
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+	
+	public String getImgUrl() {
+		return imgUrl;
+	}
+	
+
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
+	}
+	
+	public Long getId() {
+		return id;
+	}
+	
+
+	public Set<Category> getCategories() {
+		return categories;
+	}
+
 	@JsonIgnore
 	public Set<Order> getOrders(){
 		Set<Order> set = new HashSet<>();
@@ -79,37 +109,10 @@ public class Product implements Serializable {
 		return set;		
 	}
 	
-	public String getDescription() {
-		return Description;
-	}
-
-	public void setDescription(String description) {
-		Description = description;
-	}
-
-	public Double getPrice() {
-		return price;
-	}
-
-	public void setPrice(Double price) {
-		this.price = price;
-	}
-
-	public String getImgUrl() {
-		return imgUrl;
-	}
-
-	public void setImgUrl(String imgUrl) {
-		this.imgUrl = imgUrl;
-	}
-
-	public Set<Category> getCategories() {
-		return categories;
-	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(Id);
+		return Objects.hash(id);
 	}
 
 	@Override
@@ -121,7 +124,7 @@ public class Product implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Product other = (Product) obj;
-		return Objects.equals(Id, other.Id);
+		return Objects.equals(id, other.id);
 	}
 	
 }
