@@ -88,8 +88,8 @@ public class TestConfig implements CommandLineRunner {
 		Payment pay1 = new Payment(null,Instant.parse( "2019-06-20T21:53:07Z"), o1);
 		o1.setPayment(pay1);//vincula o pagamento ao pedido(seta na associação Order o objeto Payment)
 		orderRepository.save(o1);//salva novamente a classe que nçao é dependente
-		
+		                                                  
 		}
-	
+	                                         
 	
 }
